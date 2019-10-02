@@ -1,16 +1,19 @@
 package ch.toast.whitejack.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
@@ -59,13 +62,16 @@ public class MainController {
 
 	private String requestCards(int cardCount) {
 		try {
+			RestTemplate rt = new RestTemplate();
+			HttpHeaders headers = new HttpHeaders();
+			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+			headers.add("user-agent",
+					"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+			HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 			String url = "https://deckofcardsapi.com/api/deck/" + deck.getDeck_id() + "/draw/?count=" + cardCount;
-			URL objU = new URL(url);
-			HttpURLConnection con = (HttpURLConnection) objU.openConnection();
-			int responseCode = con.getResponseCode();
-			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			ResponseEntity<String> res = rt.exchange(url, HttpMethod.GET, entity, String.class);
 
-			return in.readLine();
+			return res.getBody();
 		} catch (Exception e) {
 			return "";
 		}
@@ -73,14 +79,16 @@ public class MainController {
 
 	private String shuffle() {
 		try {
+			RestTemplate rt = new RestTemplate();
+			HttpHeaders headers = new HttpHeaders();
+			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+			headers.add("user-agent",
+					"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+			HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 			String url = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1";
-			URL objU = new URL(url);
-			HttpURLConnection con = (HttpURLConnection) objU.openConnection();
-			con.setRequestMethod("GET");
-			int responseCode = con.getResponseCode();
-			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			ResponseEntity<String> res = rt.exchange(url, HttpMethod.GET, entity, String.class);
 
-			return in.readLine();
+			return res.getBody();
 		} catch (Exception e) {
 			return "";
 		}
