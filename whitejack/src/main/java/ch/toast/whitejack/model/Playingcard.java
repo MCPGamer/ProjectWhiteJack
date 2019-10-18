@@ -5,7 +5,22 @@ public class Playingcard {
 	private String value;
 	private String suit;
 	private String code;
+	
+	// Used for turned over Cards (where u see cardback)
+	private Playingcard turnedCard;
 
+	public Playingcard() {
+
+	}
+	
+	public Playingcard(Playingcard playingcard) {
+		image = "/images/Cardback.png";
+		value = "0";
+		value = "0";
+		value = "0";
+		turnedCard = playingcard;
+	}
+	
 	public String getImage() {
 		return image;
 	}
@@ -36,5 +51,13 @@ public class Playingcard {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public Playingcard getTurnedCard() {
+		return turnedCard;
+	}
+
+	public void setTurnedCard(Playingcard turnedCard) {
+		this.turnedCard = turnedCard;
 	}
 }

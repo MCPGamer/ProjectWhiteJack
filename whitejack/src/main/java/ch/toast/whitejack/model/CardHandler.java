@@ -47,13 +47,41 @@ public class CardHandler {
 		for (JSONObject card : cards) {
 			Playingcard playingcard = new Playingcard();
 
-			playingcard.setImage(card.getString("image"));
+			String image = card.getString("image");
+			while(image.contains("/")) {
+				image = image.substring(image.indexOf("/") + 1);
+			}
+			
+			playingcard.setImage("/images/" + image);
 			playingcard.setCode(card.getString("code"));
 			playingcard.setSuit(card.getString("suit"));
 			playingcard.setValue(card.getString("value"));
 
 			drawnCards.add(playingcard);
 		}
+	}
+
+	public Playingcard drawCard(Deck deck, boolean isCoverUp) {
+		String json = requestCards(deck, 1);
+
+		JSONObject deckObj = new JSONObject(json);
+		JSONArray cardsArray = deckObj.getJSONArray("cards");
+
+		ArrayList<JSONObject> cards = new ArrayList<>();
+		for (int i = 0; i < cardsArray.length(); i++) {
+			cards.add((JSONObject) cardsArray.get(i));
+		}
+
+		Playingcard playingcard = new Playingcard();
+		for (JSONObject card : cards) {
+
+			playingcard.setImage(card.getString("image"));
+			playingcard.setCode(card.getString("code"));
+			playingcard.setSuit(card.getString("suit"));
+			playingcard.setValue(card.getString("value"));
+
+		}
+		return playingcard;
 	}
 
 	public String request(String url) {
