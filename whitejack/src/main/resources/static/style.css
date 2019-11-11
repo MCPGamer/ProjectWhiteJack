@@ -1,0 +1,46 @@
+.betting {
+	float: right;
+	padding-right: 50px;
+}
+
+.cardDiv {
+	clear: both;
+	background: transparent;
+	display: flex;
+}
+
+.card {
+	width: 200px;
+	background: transparent;
+}
+
+body {
+	background: transparent url(bg.jpg) no-repeat;
+	color: white;
+	height: 100%;
+}
+
+.btn-primary {
+	background-color: brown;
+	border-color: brown;
+}
+
+.btn-primary:hover {
+	background-color: #B5651D;
+	border-color: #B5651D;
+}
+
+.carddeck {
+	width: 80%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.center {
+	text-align: center;
+}
+
+.bigText {
+	font-size: 100px;
+}

@@ -10,17 +10,20 @@
     
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" th:href="@{/bootstrap-4.1.3/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
 </head>
 <body>
     <div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h1>Willkommen bei Project: White Jack</h1>
-				<ul>
+				<h1 class="center">Willkommen bei Project: White Jack</h1>
+				<img th:src="@{/images/Cards.png}" class="carddeck"/>
+				<ul class="center bigText">
 					<a th:href="@{game}" class="btn btn-primary"><li>Jetzt Spielen</li></a>
 				</ul>
 			</div>
 		</div>
+		
     </div>
 
 

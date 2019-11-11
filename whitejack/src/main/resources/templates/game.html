@@ -4,12 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet"
 	th:href="@{/bootstrap-4.1.3/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>	
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>White Jack</title>
 </head>
 <body>
 	<h1>Project: White Jack, A Black Jack Game</h1>
-	<form style="float: right" action="#" th:action="@{game}"
+	<form class="betting" action="#" th:action="@{game}"
 		th:object="${player}" method="POST">
 		Your Balance:
 		<p th:text="*{balance}"></p>
@@ -38,6 +39,7 @@
 			</p>
 			<div th:if="${gameRunning}">
 				<a th:href="@{/game/draw}" class="btn btn-primary">Hit (Draw Card)</a>
+				<p></p>
 				<p th:unless="${gameRunning and endTurn}">
 					<a th:href="@{/game/finish}" class="btn btn-primary">Stay (Finish)</a>
 				</p>
@@ -46,18 +48,17 @@
 					<a th:href="@{/game/end}" class="btn btn-primary">End Game</a>
 				</p>
 			</div>
-			<div style="clear: both;">
-				<h2>Dealer Cards right now:</h2>
+			<h2>Dealer Cards right now:</h2>
+			<div class="cardDiv">
 				<p th:each="dealerCard: ${DealerCards}">
-					<img style="float: left; width:250px;"
-						class="img-rounded img-responsive"
+					<img class="card img-rounded img-responsive"
 						th:src="${dealerCard.image}" />
 				</p>
 			</div>
-			<div style="clear: both;">
-				<h2>Your Cards right now:</h2>
+			<h2>Your Cards right now:</h2>
+			<div class="cardDiv">
 				<p th:each="drawnCard: ${DrawnCards}">
-					<img style="float: left;width:250px;" class="img-rounded img-responsive"
+					<img class="card img-rounded img-responsive"
 						th:src="${drawnCard.image}" />
 				</p>
 			</div>
