@@ -31,14 +31,14 @@
 	</div>
 	<div>
 		<div th:if="${player.balance <= 0}">
-			<h2>Sadly youve bet all your Money, Please reset all...</h2>
+			<h2>Sadly you've bet all your Money, Please reset all...</h2>
 		</div>
 		<div th:if="${player.balance > 0}">
 			<p th:unless="${gameRunning}">
 				<a th:href="@{/game/start}" class="btn btn-primary">Start Game</a>
 			</p>
 			<div th:if="${gameRunning}">
-				<a th:href="@{/game/draw}" class="btn btn-primary">Hit (Draw Card)</a>
+				<a th:unless="${gameRunning and endTurn}" th:href="@{/game/draw}" class="btn btn-primary">Hit (Draw Card)</a>
 				<p></p>
 				<p th:unless="${gameRunning and endTurn}">
 					<a th:href="@{/game/finish}" class="btn btn-primary">Stay (Finish)</a>
